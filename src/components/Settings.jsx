@@ -235,10 +235,7 @@ export default function Settings({ requirePin, currentUser }) {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Right Column */}
-        <div>
           {/* Print Settings */}
           <div className="card" style={{ marginBottom: 'var(--space-xl)' }}>
             <div className="settings-section">
@@ -263,6 +260,60 @@ export default function Settings({ requirePin, currentUser }) {
             </div>
           </div>
 
+          {/* Theme & Language side-by-side */}
+          <div className="form-row form-row-2" style={{ marginBottom: 'var(--space-xl)' }}>
+            {/* Theme */}
+            <div className="card" style={{ marginBottom: 0 }}>
+              <div className="settings-section">
+                <div className="settings-section-title">{t('settings.theme')}</div>
+                <div style={{ display: 'flex', gap: 'var(--space-md)' }}>
+                  <button
+                    type="button"
+                    className={`btn ${config.theme !== 'dark' ? 'btn-primary' : 'btn-secondary'}`}
+                    onClick={() => handleThemeSwitch('light')}
+                    style={{ flex: 1, padding: 'var(--space-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                  >
+                    <Sun size={16} /> {t('settings.lightMode')}
+                  </button>
+                  <button
+                    type="button"
+                    className={`btn ${config.theme === 'dark' ? 'btn-primary' : 'btn-secondary'}`}
+                    onClick={() => handleThemeSwitch('dark')}
+                    style={{ flex: 1, padding: 'var(--space-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                  >
+                    <Moon size={16} /> {t('settings.darkMode')}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Language */}
+            <div className="card" style={{ marginBottom: 0 }}>
+              <div className="settings-section">
+                <div className="settings-section-title">{t('settings.language')}</div>
+                <div style={{ display: 'flex', gap: 'var(--space-md)' }}>
+                  <button
+                    className={`btn ${locale === 'en' ? 'btn-primary' : 'btn-secondary'}`}
+                    onClick={() => handleLanguageSwitch('en')}
+                    style={{ flex: 1, padding: 'var(--space-lg)' }}
+                  >
+                    🇬🇧 {t('settings.english')}
+                  </button>
+                  <button
+                    className={`btn ${locale === 'hi' ? 'btn-primary' : 'btn-secondary'}`}
+                    onClick={() => handleLanguageSwitch('hi')}
+                    style={{ flex: 1, padding: 'var(--space-lg)' }}
+                  >
+                    🇮🇳 {t('settings.hindi')}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column */}
+        <div>
           {/* Hardware Config */}
           <div className="card" style={{ marginBottom: 'var(--space-xl)' }}>
             <div className="settings-section">
@@ -383,54 +434,6 @@ export default function Settings({ requirePin, currentUser }) {
                   ⚠️ Start the server via the Desktop shortcut to enable WhatsApp. Deep-link fallback is active.
                 </div>
               )}
-            </div>
-          </div>
-
-          {/* Theme */}
-          <div className="card" style={{ marginBottom: 'var(--space-xl)' }}>
-            <div className="settings-section">
-              <div className="settings-section-title">{t('settings.theme')}</div>
-              <div style={{ display: 'flex', gap: 'var(--space-md)' }}>
-                <button
-                  type="button"
-                  className={`btn ${config.theme !== 'dark' ? 'btn-primary' : 'btn-secondary'}`}
-                  onClick={() => handleThemeSwitch('light')}
-                  style={{ flex: 1, padding: 'var(--space-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-                >
-                  <Sun size={16} /> {t('settings.lightMode')}
-                </button>
-                <button
-                  type="button"
-                  className={`btn ${config.theme === 'dark' ? 'btn-primary' : 'btn-secondary'}`}
-                  onClick={() => handleThemeSwitch('dark')}
-                  style={{ flex: 1, padding: 'var(--space-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-                >
-                  <Moon size={16} /> {t('settings.darkMode')}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Language */}
-          <div className="card" style={{ marginBottom: 'var(--space-xl)' }}>
-            <div className="settings-section">
-              <div className="settings-section-title">{t('settings.language')}</div>
-              <div style={{ display: 'flex', gap: 'var(--space-md)' }}>
-                <button
-                  className={`btn ${locale === 'en' ? 'btn-primary' : 'btn-secondary'}`}
-                  onClick={() => handleLanguageSwitch('en')}
-                  style={{ flex: 1, padding: 'var(--space-lg)' }}
-                >
-                  🇬🇧 {t('settings.english')}
-                </button>
-                <button
-                  className={`btn ${locale === 'hi' ? 'btn-primary' : 'btn-secondary'}`}
-                  onClick={() => handleLanguageSwitch('hi')}
-                  style={{ flex: 1, padding: 'var(--space-lg)' }}
-                >
-                  🇮🇳 {t('settings.hindi')}
-                </button>
-              </div>
             </div>
           </div>
 
