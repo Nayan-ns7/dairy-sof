@@ -1446,8 +1446,9 @@ body {
 
 .settings-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: var(--space-xl);
+  align-items: start;
 }
 
 /* Media queries for fluid grids */
