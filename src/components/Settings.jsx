@@ -212,22 +212,26 @@ export default function Settings({ requirePin, currentUser }) {
 
             <div style={{ marginTop: 'var(--space-lg)' }}>
               <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 'var(--space-md)' }}>{t('settings.shiftTimings')}</div>
-              <div className="form-row form-row-4">
-                <div className="form-group">
-                  <label className="form-label">{t('settings.morningStart')}</label>
-                  <input type="time" className="form-input mono" value={config.shiftMorningStart} onChange={(e) => updateConfig('shiftMorningStart', e.target.value)} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                <div className="form-row form-row-2">
+                  <div className="form-group">
+                    <label className="form-label">{t('settings.morningStart')}</label>
+                    <input type="time" className="form-input mono" value={config.shiftMorningStart} onChange={(e) => updateConfig('shiftMorningStart', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">{t('settings.morningEnd')}</label>
+                    <input type="time" className="form-input mono" value={config.shiftMorningEnd} onChange={(e) => updateConfig('shiftMorningEnd', e.target.value)} />
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label className="form-label">{t('settings.morningEnd')}</label>
-                  <input type="time" className="form-input mono" value={config.shiftMorningEnd} onChange={(e) => updateConfig('shiftMorningEnd', e.target.value)} />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">{t('settings.eveningStart')}</label>
-                  <input type="time" className="form-input mono" value={config.shiftEveningStart} onChange={(e) => updateConfig('shiftEveningStart', e.target.value)} />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">{t('settings.eveningEnd')}</label>
-                  <input type="time" className="form-input mono" value={config.shiftEveningEnd} onChange={(e) => updateConfig('shiftEveningEnd', e.target.value)} />
+                <div className="form-row form-row-2">
+                  <div className="form-group">
+                    <label className="form-label">{t('settings.eveningStart')}</label>
+                    <input type="time" className="form-input mono" value={config.shiftEveningStart} onChange={(e) => updateConfig('shiftEveningStart', e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">{t('settings.eveningEnd')}</label>
+                    <input type="time" className="form-input mono" value={config.shiftEveningEnd} onChange={(e) => updateConfig('shiftEveningEnd', e.target.value)} />
+                  </div>
                 </div>
               </div>
             </div>
