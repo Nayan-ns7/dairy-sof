@@ -5,7 +5,7 @@ import { calcSnfFromClr, lookupRate } from '../utils/rateCalc';
 import { formatCurrency, formatNumber, todayISO, getCurrentShift } from '../utils/formatters';
 import { isSerialSupported, connectDevice, parseSerialData } from '../utils/serialPort';
 import { buildMilkEntryMessage, sendViaWhatsApp, sendViaSms } from '../utils/messaging';
-import { Printer, Trash2, AlertCircle, CheckCircle, ShoppingCart, Activity, Heart, Info, Usb, Unplug, MessageCircle, Smartphone } from 'lucide-react';
+import { Printer, Trash2, AlertCircle, CheckCircle, ShoppingCart, Activity, Heart, Info, Usb, Unplug, MessageCircle, Smartphone, AlertTriangle, Zap } from 'lucide-react';
 
 export default function PurchaseEntry({ requirePin }) {
   const { t } = useTranslation();
@@ -94,17 +94,22 @@ export default function PurchaseEntry({ requirePin }) {
   }, [clr, fat, config]);
 
   // Auto-calculate rate and amount when fat/snf/qty changes
+  // Applies rateBonusPercent from config as a multiplier
   useEffect(() => {
     const currentChart = activeCharts[milkType];
     if (currentChart && fat && snf && qty) {
-      const r = lookupRate(currentChart, parseFloat(fat), parseFloat(snf));
+      let r = lookupRate(currentChart, parseFloat(fat), parseFloat(snf));
+      const bonus = config?.rateBonusPercent || 0;
+      if (bonus !== 0) {
+        r = Number((r * (1 + bonus / 100)).toFixed(config?.decimalPrecision || 2));
+      }
       setRate(r);
       setAmount(Number((r * parseFloat(qty)).toFixed(2)));
     } else {
       setRate(0);
       setAmount(0);
     }
-  }, [fat, snf, qty, milkType, activeCharts]);
+  }, [fat, snf, qty, milkType, activeCharts, config]);
 
   // Lookup farmer by code
   const lookupFarmer = useCallback(async (code) => {
@@ -257,6 +262,28 @@ export default function PurchaseEntry({ requirePin }) {
           <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>Reset</span>
         </div>
       </div>
+
+      {/* Rate Bonus Banner */}
+      {config?.rateBonusPercent !== 0 && config?.rateBonusPercent != null && (
+        <div className={`rate-bonus-banner ${config.rateBonusPercent > 0 ? 'positive' : 'negative'}`}>
+          <Zap size={14} />
+          {config.rateBonusPercent > 0 ? '⬆' : '⬇'} Rate {config.rateBonusPercent > 0 ? 'bonus' : 'penalty'} {config.rateBonusPercent > 0 ? '+' : ''}{config.rateBonusPercent}% active on all entries
+        </div>
+      )}
+
+      {/* Quality Threshold Warning */}
+      {fat && config?.minFatThreshold > 0 && parseFloat(fat) < config.minFatThreshold && (
+        <div className="threshold-warning" style={{ marginBottom: 'var(--space-md)' }}>
+          <AlertTriangle size={14} />
+          FAT {parseFloat(fat).toFixed(1)}% is below minimum threshold ({config.minFatThreshold}%)
+        </div>
+      )}
+      {snf && config?.minSnfThreshold > 0 && parseFloat(snf) < config.minSnfThreshold && (
+        <div className="threshold-warning" style={{ marginBottom: 'var(--space-md)' }}>
+          <AlertTriangle size={14} />
+          SNF {parseFloat(snf).toFixed(1)}% is below minimum threshold ({config.minSnfThreshold}%)
+        </div>
+      )}
 
       {/* Entry Form Card */}
       <div className="card" style={{ marginBottom: 'var(--space-xl)' }}>

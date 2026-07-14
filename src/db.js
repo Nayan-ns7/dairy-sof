@@ -102,6 +102,11 @@ export async function ensureDefaults() {
       // Hardware configuration for Web Serial API
       scaleBaudRate: 9600,
       analyzerBaudRate: 9600,
+      // Quality control thresholds (0 = disabled)
+      minFatThreshold: 0,
+      minSnfThreshold: 0,
+      // Rate bonus/penalty percentage (0 = none)
+      rateBonusPercent: 0,
       createdAt: new Date().toISOString(),
     });
   }

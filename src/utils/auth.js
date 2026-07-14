@@ -39,6 +39,7 @@ export const PAGE_ACCESS = {
   dispatches:   'operator',
   livestock:    'operator',
   loans:        'manager',
+  analytics:    'manager',
   settings:     'admin',
 };
 

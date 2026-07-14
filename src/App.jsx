@@ -16,6 +16,7 @@ import Dispatches from './components/Dispatches';
 import Settings from './components/Settings';
 import Livestock from './components/Livestock';
 import Loans from './components/Loans';
+import Analytics from './components/Analytics';
 
 /**
  * App Shell — layout with persistent sidebar, hash-based routing,
@@ -201,6 +202,7 @@ export default function App() {
 
     switch (activePage) {
       case 'dashboard': return <Dashboard onNavigate={navigate} />;
+      case 'analytics': return <Analytics requirePin={requirePin} />;
       case 'purchase': return <PurchaseEntry requirePin={requirePin} />;
       case 'farmers': return <FarmerMaster requirePin={requirePin} />;
       case 'rate-chart': return <RateChart requirePin={requirePin} />;

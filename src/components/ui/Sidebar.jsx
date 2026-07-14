@@ -17,10 +17,12 @@ import {
   Coins,
   LogOut,
   User,
+  Activity,
 } from 'lucide-react';
 
 const NAV_ITEMS = [
   { id: 'dashboard', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
+  { id: 'analytics', icon: Activity, labelKey: 'nav.analytics' },
   { id: 'purchase', icon: ShoppingCart, labelKey: 'nav.purchase' },
   { id: 'farmers', icon: Users, labelKey: 'nav.farmers' },
   { id: 'rate-chart', icon: BarChart3, labelKey: 'nav.rateChart' },
